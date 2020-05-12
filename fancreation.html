@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title>Fan Creation</title>
+	<meta name="viewport" content="width=device-width", initial-scale=1.0>
+	<link rel="stylesheet" type="text/css" href="fanstyle.css"/>
+  <script type="text/javascript" src="jquery.min.js"></script>
+</head>
+
+
+
+<body>
+
+
+    <div class="wrapper" align="center">
+
+      <div class="first-circle">
+      	
+      	<div id="fan-blade"></div>
+
+      </div>
+
+      <div class="fan-smallstand"></div>
+
+
+      <div class="fanstand">
+      	
+       <button id="buttonon" class="bon" onclick="toggle();">On</button>
+       <!-- <button id="buttonoff" class="boff" onclick="stop();">Off</button> -->
+       <button class="bon1">1</button>
+       <button class="bon2">2</button>
+       <button class="bon3">3</button>
+       <button class="bon4"><img src="rotate2.png" style="width: 20px; height: 20px;"></button>
+
+
+
+
+      </div>
+
+      <div class="bottom-stand"></div>
+
+    </div>
+
+  <audio id="myaudio" autoplay loop></audio>
+
+<script>
+
+  var state = false;
+  var rotating = false;
+
+
+
+///******TOGGLE BUTTON FUNCTION*******///
+
+  function toggle(){
+
+
+     state = !state;
+     if (state) {
+
+         start();
+         console.log(state)
+
+     }else{
+
+         stop();
+         console.log(state)
+
+     }
+
+  }
+///******START FAN FUNCTION*******///
+
+
+
+     function start(){
+
+      $("#fan-blade").css("animation","fanrotate linear .67s infinite");
+      $("#myaudio").attr("src", "sec.mp3");
+      $(".bon").text("Off");
+      state = true;
+
+      if (rotating) {
+        $(".first-circle, fan-smallstand").css("animation", "fan-turn linear 8s infinite");
+      }
+
+
+
+}
+
+// For other buttons
+
+
+    $(".bon2").click(function(){
+      if (state) {
+      $("#fan-blade").css("animation","fanrotate linear .37s infinite");
+    }
+      
+    });
+
+    $(".bon3").click(function(){
+      if (state) {
+      $("#fan-blade").css("animation","fanrotate linear .17s infinite");
+    }
+      
+    });
+
+    $(".bon1").click(function(){
+      if (state) {
+      $("#fan-blade").css("animation","fanrotate linear .67s infinite");
+    }
+    
+        });
+
+    $(".bon4").click(function(){
+      if (state) {
+        if (!rotating) {
+          $(".first-circle, fan-smallstand").css("animation", "fan-turn linear 8s infinite");
+        } else{
+          $(".first-circle, .fan-smallstand").css("animation-play-state", "paused");
+        }
+        rotating = !rotating;
+      }
+      
+    });
+
+///******STOP FAN FUNCTION*******///
+
+ function stop(){
+    // console.log("Stop called!");
+    $(".bon").text("On");
+        $("#fan-blade").css("animation-play-state", "paused");
+        $("#myaudio").attr("src", "");
+        $(".first-circle").css("animation-play-state", "paused");
+        $(".fan-smallstand").css("animation", "none");
+
+     $(".bon1, .bon2, .bon3, .bon4").css("animation", "none");
+           
+}
+</script>
+</body>
+
+
+</html>
